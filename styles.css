@@ -25,7 +25,7 @@ body {
    grid-template-columns: repeat(4, 1fr);
    grid-template-rows: repeat(2, 1fr);
    gap: 30px;
-   margin: 5%;
+   margin: 2%;
 }
 
 .profile-card {
@@ -69,10 +69,7 @@ h1 {
    transition: 0.4s;
 }
 
-.card {
-   background-color: var(--Navy);
-   border-radius: 15px;
-}
+
 .work-top-bg-color {
    height: 40px;
    background-color: var(--orange-work);
@@ -133,13 +130,31 @@ h1 {
    border-top-left-radius: 15px;
    z-index: -1;
 }
-.heading {
+
+.card {
+   background-color: var(--Navy);
+   border-radius: 15px;
+}
+.card:hover {
+   background-color: var(--light-purple);
+   transition: 0.4s;
+}
+.card-header {
    display: flex;
    justify-content: space-between;
    align-items: center;
    margin: 20px;
 }
-.heading p {
+.heading {
    font-weight: 700;
-   font-size: 18px;
+}
+.current {
+   margin: 0 auto 20px 20px;
+   padding: 0;
+   font-weight: 300;
+   font-size: 3rem;
+}
+.previous {
+   color: var(--navy-light);
+   margin: 0 auto 20px 20px;
 }
