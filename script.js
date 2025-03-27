@@ -8,18 +8,15 @@ let selfCareCard;
 
 const dailyRecordButton = document.getElementById("dailyRecord");
 const WeeklyRecordButton = document.getElementById("WeeklyRecord");
-// const monthlyRecordButton = document.getElementById("monthlyRecord");
+const monthlyRecordButton = document.getElementById("monthlyRecord");
 
 dailyRecordButton.addEventListener("click", defaultValue);
 WeeklyRecordButton.addEventListener("click", (e) => {
    weeklyData();
    e.currentTarget.style.color = "white";
-   
-   // WeeklyRecordButton.style.color = "white";
-   // WeeklyRecordButton.onblur((e) )
 });
 
-// monthlyRecordButton.addEventListener("click", monthlyData);
+monthlyRecordButton.addEventListener("click", monthlyData);
 
 const hour = "hrs";
 const lastWeek = "Last Week -";
@@ -69,9 +66,6 @@ async function defaultValue(data) {
       function dailyPlayValue() {
          let dailyPlayValue = playData.timeframes.daily;
 
-         // let playCurrentHRS = document.getElementById("playCurrentHRS");
-         // let playPrevioustHRS = document.getElementById("playPrevioustHRS");
-
          playCurrentHRS.textContent = `${dailyPlayValue.current}${hour}`;
          playPrevioustHRS.textContent = `${lastWeek} ${dailyPlayValue.previous}${hour}`;
       }
@@ -83,9 +77,6 @@ async function defaultValue(data) {
    if(studyData) {
       function dailyStudyValue() {
          let dailyStudyValue = studyData.timeframes.daily;
-
-         // let studyCurrentHRS = document.getElementById("studyCurrentHRS");
-         // let studyPreviousHRS = document.getElementById("studyPreviousHRS");
 
          studyCurrentHRS.textContent = `${dailyStudyValue.current}${hour}`;
          studyPreviousHRS.textContent =`${lastWeek} ${dailyStudyValue.previous}${hour}`;
@@ -132,7 +123,7 @@ async function defaultValue(data) {
    selfCareCard = selfCareData;
 };
 
-   // Weekly data function
+   // function to populate monthly data in the UI
 function weeklyData() {
    if(workCard) {
       let weeklyData = workCard.timeframes.weekly;
@@ -149,7 +140,7 @@ function weeklyData() {
 
       playCurrentHRS.textContent = `${weeklyData.current}${hour}`;
       playPrevioustHRS.textContent = `${lastWeek} ${weeklyData.previous}${hour}`;
-   };
+   }
 
    if(studyCard) {
       let weeklyData = studyCard.timeframes.weekly;
@@ -189,8 +180,50 @@ weeklyData();
 
 
    // function to populate monthly data in the UI
+function monthlyData() {
+   if(workCard) {
+      let monthlyData = workCard.timeframes.monthly;
 
+      workCurrentHRS.textContent = `${monthlyData.current}${hour}`;
+      workPreviousHRS.textContent = `${lastWeek} ${monthlyData.previous}${hour}`;
+   }
 
+   if(playCard) {
+      let monthlyData = playCard.timeframes.monthly;
+
+      playCurrentHRS.textContent = `${monthlyData.current}${hour}`;
+      playPrevioustHRS.textContent = `${lastWeek} ${monthlyData.previous}${hour}`;
+   }
+
+   if(studyCard) {
+      let monthlyData = studyCard.timeframes.monthly;
+
+      studyCurrentHRS.textContent = `${monthlyData.current}${hour}`;
+      studyPreviousHRS.textContent = `${lastWeek} ${monthlyData.previous}${hour}`;
+   }
+
+   if(exerciseCard) {
+      let monthlyData = exerciseCard.timeframes.monthly;
+
+      exerciseCurrentHRS.textContent = `${monthlyData.current}${hour}`;
+      exercisePreviousHRS.textContent = `${lastWeek} ${monthlyData.previous}${hour}`;
+   }
+
+   if(socialCard) {
+      let monthlyData = socialCard.timeframes.monthly;
+
+      socialCurrentHRS.textContent = `${monthlyData.current}${hour}`;
+      socialPreviousHRS.textContent = `${lastWeek} ${monthlyData.previous}${hour}`
+   }
+
+   if(selfCareCard) {
+      let monthlyData = selfCareCard.timeframes.monthly;
+
+      selfCareCurrentHRS.textContent = `${monthlyData.current}${hour}`;
+      selfCarePreviousHRS.textContent = `${lastWeek} ${monthlyData.previous}${hour}`
+   }
+   monthlyData();
+}
 
 
 
