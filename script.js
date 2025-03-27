@@ -10,13 +10,13 @@ const dailyRecordButton = document.getElementById("dailyRecord");
 const WeeklyRecordButton = document.getElementById("WeeklyRecord");
 const monthlyRecordButton = document.getElementById("monthlyRecord");
 
-dailyRecordButton.addEventListener("click", defaultValue);
-WeeklyRecordButton.addEventListener("click", (e) => {
-   weeklyData();
-   e.currentTarget.style.color = "white";
-});
-
+dailyRecordButton.addEventListener("click", () => defaultValue(allPreriodData));
+WeeklyRecordButton.addEventListener("click", weeklyData);
 monthlyRecordButton.addEventListener("click", monthlyData);
+
+let workCurrentHRS = document.getElementById("workCurrentHRS");
+let workPreviousHRS = document.getElementById("workPreviousHRS");
+
 
 const hour = "hrs";
 const lastWeek = "Last Week -";
@@ -38,7 +38,7 @@ fetch('data.json')
    })
    .catch(error => console.error('Error fetching data:', error));
 
-async function defaultValue(data) {
+function defaultValue(data) {
    let workData = data.find(prop => prop.title === "Work");
    let playData = data.find(prop => prop.title === "Play");
    let studyData = data.find(prop => prop.title === "Study");
@@ -50,9 +50,6 @@ async function defaultValue(data) {
    if(workData) {
       function dailyWorkValue() {
          let dailyWorkValue = workData.timeframes.daily; 
-
-         // let workCurrentHRS = document.getElementById("workCurrentHRS");
-         // let workPreviousHRS = document.getElementById("workPreviousHRS");
 
          workCurrentHRS.textContent = `${dailyWorkValue.current}${hour}`;
          workPreviousHRS.textContent = `${lastWeek} ${dailyWorkValue.previous} ${hour}`
@@ -223,7 +220,10 @@ function monthlyData() {
       selfCarePreviousHRS.textContent = `${lastWeek} ${monthlyData.previous}${hour}`
    }
    monthlyData();
-}
+};
+
+// chance button color when active
+
 
 
 

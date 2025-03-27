@@ -161,3 +161,47 @@ h1 {
    margin: 0 auto 20px 20px;
    font-size: 13px;
 }
+
+
+@media screen and (max-width: 900px) {
+   main {
+      margin: 30px auto;
+   }
+   .container {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+   }
+
+   .profile-card {
+      padding-bottom: 30px;
+   }
+   .profile {
+      display: flex;
+      align-items: center;
+   }
+   .jeremy-img {
+      margin: 1rem;
+   }
+   .report-for {
+      /* display: block; */
+      margin: auto;
+   }
+   h1 {
+      width: 100%;
+      margin: auto;
+      font-size: 1.2em;
+   }
+
+   .date {
+      display: flex;
+      padding-bottom: 30px;
+   }
+
+   .para-wrap {
+      display: flex;
+      align-items: center;
+   }
+   /* .current {
+      display: inline-flex;
+   } */
+}
