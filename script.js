@@ -1,6 +1,30 @@
-const workCard = document.getElementById("work")
+
+let workCard;
+let playCard;
+let studyCard;
+let exerciseCard;
+let socialCard;
+let selfCareCard;
+
+const dailyRecordButton = document.getElementById("dailyRecord");
+const WeeklyRecordButton = document.getElementById("WeeklyRecord");
+// const monthlyRecordButton = document.getElementById("monthlyRecord");
+
+dailyRecordButton.addEventListener("click", defaultValue);
+WeeklyRecordButton.addEventListener("click", (e) => {
+   weeklyData();
+   e.currentTarget.style.color = "white";
+   
+   // WeeklyRecordButton.style.color = "white";
+   // WeeklyRecordButton.onblur((e) )
+});
+
+// monthlyRecordButton.addEventListener("click", monthlyData);
+
 const hour = "hrs";
 const lastWeek = "Last Week -";
+
+let allPreriodData = [];
 
 // Fetch the JSON data
 fetch('data.json')
@@ -11,8 +35,9 @@ fetch('data.json')
       return response.json();
    })
    .then(data => {
-      console.log(data); // Check the JSON structure in the console
+      allPreriodData = data;
       defaultValue(data);
+      console.log(data); 
    })
    .catch(error => console.error('Error fetching data:', error));
 
@@ -24,158 +49,153 @@ async function defaultValue(data) {
    let socialData = data.find(prop => prop.title === "Social");
    let selfCareData = data.find(prop => prop.title === "Self Care");
 
-   // if (workData) {
-      // let dailyWorkValue = workData.timeframes.daily; 
-
-      // Update UI with current and previous hours
-      // document.querySelectorAll(".current").forEach(hour => {
-      //    hour.textContent = `${dailyWorkValue.current} hrs`;
-      // });
-
-   //    document.querySelectorAll(".previous").forEach(week => {
-   //       week.textContent = `Last Week - ${dailyWorkValue.previous} hrs`;
-   //    });
-   // }
-
+   // Work  default data
    if(workData) {
-      // let dailyWorkValue = workData.timeframes.daily; 
-
-      // let workCurrentHRS = document.getElementById("workCurrentHRS");
-      // let workPreviousHRS = document.getElementById("workPreviousHRS");
-
-      // workCurrentHRS.textContent = `${dailyWorkValue.current}hrs`;
-      // workPreviousHRS.textContent = `Lask Week - ${dailyWorkValue.previous}hrs`
-
       function dailyWorkValue() {
          let dailyWorkValue = workData.timeframes.daily; 
 
-         let workCurrentHRS = document.getElementById("workCurrentHRS");
-         let workPreviousHRS = document.getElementById("workPreviousHRS");
+         // let workCurrentHRS = document.getElementById("workCurrentHRS");
+         // let workPreviousHRS = document.getElementById("workPreviousHRS");
 
          workCurrentHRS.textContent = `${dailyWorkValue.current}${hour}`;
          workPreviousHRS.textContent = `${lastWeek} ${dailyWorkValue.previous} ${hour}`
       }
       dailyWorkValue();
+      workCard = workData;
    };
 
+   // Play  default data
    if(playData) {
       function dailyPlayValue() {
          let dailyPlayValue = playData.timeframes.daily;
 
-         let playCurrentHRS = document.getElementById("playCurrentHRS");
-         let playPrevioustHRS = document.getElementById("playPrevioustHRS");
+         // let playCurrentHRS = document.getElementById("playCurrentHRS");
+         // let playPrevioustHRS = document.getElementById("playPrevioustHRS");
 
          playCurrentHRS.textContent = `${dailyPlayValue.current}${hour}`;
-         playPrevioustHRS.textContent = `${lastWeek} ${dailyPlayValue.previous}`;
+         playPrevioustHRS.textContent = `${lastWeek} ${dailyPlayValue.previous}${hour}`;
       }
       dailyPlayValue();
+      playCard = playData;
    };
 
-   // Study data
+   // Study default data
    if(studyData) {
-      function dailyStudyValue(value) {
+      function dailyStudyValue() {
          let dailyStudyValue = studyData.timeframes.daily;
 
-         let studyCurrentHRS = document.getElementById("studyCurrentHRS");
-         let studyPreviousHRS = document.getElementById("studyPreviousHRS");
+         // let studyCurrentHRS = document.getElementById("studyCurrentHRS");
+         // let studyPreviousHRS = document.getElementById("studyPreviousHRS");
 
-         studyCurrentHRS.textContent = `${dailyStudyValue.current} ${hour}`;
-         studyPreviousHRS.textContent =`${lastWeek} ${dailyStudyValue.previous}`;
+         studyCurrentHRS.textContent = `${dailyStudyValue.current}${hour}`;
+         studyPreviousHRS.textContent =`${lastWeek} ${dailyStudyValue.previous}${hour}`;
 
       }
       dailyStudyValue();
+      studyCard = studyData;
    };
 
+    // Exercise  default data
    if(exerciseData) {
       function dailyExerciseValue() {
          let dailyExerciseValue = exerciseData.timeframes.daily;
 
-         let exerciseCurrentHRS = document.getElementById("exerciseCurrentHRS");
-         let exercisePreviousHRS = document.getElementById("exercisePreviousHRS");
-
-         exerciseCurrentHRS.textContent = `${dailyExerciseValue.current}  ${hour}`;
-         exercisePreviousHRS.textContent = `${lastWeek} ${dailyExerciseValue.previous}`;
+         exerciseCurrentHRS.textContent = `${dailyExerciseValue.current}${hour}`;
+         exercisePreviousHRS.textContent = `${lastWeek} ${dailyExerciseValue.previous}${hour}`;
       }
       dailyExerciseValue();
+      exerciseCard = exerciseData;
    };
 
-   // Social data
+   // Social default data
    if(socialData) {
       function dailySocialValue() {
          let dailySocialValue = socialData.timeframes.daily;
 
-         let socialCurrentHRS = document.getElementById("socialCurrentHRS");
-         let socialPreviousHRS = document.getElementById("socialPreviousHRS");
-
-         socialCurrentHRS.textContent = `${dailySocialValue.current}  ${hour}`;
-         socialPreviousHRS.textContent = `${lastWeek} ${dailySocialValue.previous}`;
+         socialCurrentHRS.textContent = `${dailySocialValue.current}${hour}`;
+         socialPreviousHRS.textContent = `${lastWeek} ${dailySocialValue.previous}${hour}`;
       }
       dailySocialValue();
+      socialCard = socialData;
    };
 
-   // Social data
+   // Self Care data
    if(selfCareData) {
       function dailySelfCareValue() {
          let dailySelfCareValue = selfCareData.timeframes.daily;
 
-         let selfCareCurrentHRS = document.getElementById("selfCareCurrentHRS");
-         let selfCarePreviousHRS = document.getElementById("selfCarePreviousHRS");
-
-         selfCareCurrentHRS.textContent = `${dailySelfCareValue.current}  ${hour}`;
-         selfCarePreviousHRS.textContent = `${lastWeek} ${dailySelfCareValue.previous}`;
+         selfCareCurrentHRS.textContent = `${dailySelfCareValue.current}${hour}`;
+         selfCarePreviousHRS.textContent = `${lastWeek} ${dailySelfCareValue.previous}${hour}`;
       }
-      dailySelfCareValue();
    };
+   dailySelfCareValue();
+   selfCareCard = selfCareData;
+};
+
+   // Weekly data function
+function weeklyData() {
+   if(workCard) {
+      let weeklyData = workCard.timeframes.weekly;
+
+      let workCurrentHRS = document.getElementById("workCurrentHRS");
+      let workPreviousHRS = document.getElementById("workPreviousHRS");
+
+      workCurrentHRS.textContent = `${weeklyData.current}${hour}`
+      workPreviousHRS.textContent = `${lastWeek} ${weeklyData.previous}${hour}`
+   }
+
+   if(playCard) {
+      let weeklyData = playCard.timeframes.weekly;
+
+      playCurrentHRS.textContent = `${weeklyData.current}${hour}`;
+      playPrevioustHRS.textContent = `${lastWeek} ${weeklyData.previous}${hour}`;
+   };
+
+   if(studyCard) {
+      let weeklyData = studyCard.timeframes.weekly;
+
+      studyCurrentHRS.textContent = `${weeklyData.current}${hour}`
+      studyPreviousHRS.textContent = `${lastWeek} ${weeklyData.previous}${hour}`
+   }
+
+   if(exerciseCard) {
+      let weeklyData = exerciseCard.timeframes.weekly;
+
+      exerciseCurrentHRS.textContent = `${weeklyData.current}${hour}`
+      exercisePreviousHRS.textContent = `${lastWeek} ${weeklyData.previous}${hour}`
+   }
+
+   if(socialCard) {
+      let weeklyData = socialCard.timeframes.weekly;
+
+      let socialCurrentHRS = document.getElementById("socialCurrentHRS");
+      let socialPreviousHRS = document.getElementById("socialPreviousHRS");
+
+      socialCurrentHRS.textContent = `${weeklyData.current}${hour}`
+      socialPreviousHRS.textContent = `${lastWeek} ${weeklyData.previous}${hour}`
+   }
+
+   if(selfCareCard) {
+      let weeklyData = selfCareCard.timeframes.weekly;
+
+      let selfCareCurrentHRS = document.getElementById("selfCareCurrentHRS");
+      let selfCarePreviousHRS = document.getElementById("selfCarePreviousHRS");
+
+      selfCareCurrentHRS.textContent = `${weeklyData.current}${hour}`
+      selfCarePreviousHRS.textContent = `${lastWeek} ${weeklyData.previous}${hour}`
+   }
 }
+weeklyData();
+
+
+   // function to populate monthly data in the UI
 
 
 
 
-// async function playDataValue(data) {
-//    let playData = data.find(property => property.title === "Play");
-
-//    let playDailyValue = playData.timeframes.daily;
-//    let playweeklyValue = playData.timeframes.weekly;
-//    let playMonthlyValue = playData.timeframes.monthly;
-// };
-
-// async function studyDataValue(data) {
-//    let studyData = data.find(property => property.title === "Study");
-
-//    let studyDailyValue = studyData.timeframes.daily;
-//    let studyweeklyValue = studyData.timeframes.weekly;
-//    let studyMonthlyValue = studyData.timeframes.monthly;
-// };
-
-// Exercise value assignment
-// async function exerciseDataValue(data) {
-//    let exerciseData = data.find(property => property.title === "Exercise");
-
-//    let exerciseDailyValue = exerciseData.timeframes.daily;
-//    let exerciseweeklyValue = exerciseData.timeframes.weekly;
-//    let exerciseMonthlyValue = exerciseData.timeframes.monthly;
-// };
 
 
-// social value assignment
-// async function socialDataValue(data) {
-//    let socialData = data.find(property => property.title === "Social");
 
-//    let socialDailyValue = socialData.timeframes.daily;
-//    let socialweeklyValue = socialData.timeframes.weekly;
-//    let socialMonthlyValue = socialData.timeframes.monthly;
-// };
-
-
-// self care value assignment
-// async function selfCareDataValue(data) {
-//    let selfCareData = data.find(property => property.title === "Self Care");
-//    if(selfCareData) {
-//       let selfCareDailyValue = selfCareData.timeframes.daily;
-//       let selfCareweeklyValue = selfCareData.timeframes.weekly;
-//       let selfCareMonthlyValue = selfCareData.timeframes.monthly;
-//    }
-// };
 
    
 
