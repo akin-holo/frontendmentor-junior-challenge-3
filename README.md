@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [github repo](https://github.com/akin-holo/frontendmentor-junior-challenge-3)
 - Live Site URL: [time-tracking-dashboard.netlify](https://frontendmentor-tracking-dashboard.netlify.app/)
 
 ## My process
